@@ -8,7 +8,7 @@ Este README.md describe la implementación de varios patrones de diseño creacio
 
 **Código:**
 
-~~~python
+\`\`\`python
 class CajaRegistradora:
     _instancia = None
 
@@ -25,7 +25,7 @@ class CajaRegistradora:
 caja1 = CajaRegistradora()
 caja2 = CajaRegistradora()
 print(caja1 is caja2)  # True
-~~~
+\`\`\`
 
 ## 2. Adapter
 
@@ -33,7 +33,7 @@ print(caja1 is caja2)  # True
 
 **Código:**
 
-~~~python
+\`\`\`python
 class TazaEuropea:
     def servir(self):
         print("☕ Sirviendo café en taza europea.")
@@ -54,7 +54,7 @@ taza1 = TazaEuropea()
 taza2 = AdaptadorTazaAmericana(TazaAmericana())
 taza1.servir()
 taza2.servir()
-~~~
+\`\`\`
 
 ## 3. Bridge
 
@@ -62,7 +62,7 @@ taza2.servir()
 
 **Código:**
 
-~~~python
+\`\`\`python
 class PreparacionCafé:
     def preparar(self):
         pass
@@ -87,7 +87,7 @@ barista1 = Barista(Expreso())
 barista2 = Barista(Capuchino())
 barista1.servir()
 barista2.servir()
-~~~
+\`\`\`
 
 ## 4. Decorator
 
@@ -95,7 +95,7 @@ barista2.servir()
 
 **Código:**
 
-~~~python
+\`\`\`python
 class CafeBase:
     def obtener_descripcion(self):
         return "Café"
@@ -129,7 +129,7 @@ cafe = ConLeche(cafe)
 cafe = ConCanela(cafe)
 print(cafe.obtener_descripcion())  # Café con leche con canela
 print(f"💵 Total: ${cafe.costo()} pesos")
-~~~
+\`\`\`
 
 ## 5. Chain of Responsibility
 
@@ -137,7 +137,7 @@ print(f"💵 Total: ${cafe.costo()} pesos")
 
 **Código:**
 
-~~~python
+\`\`\`python
 class Empleado:
     def __init__(self, siguiente=None):
         self.siguiente = siguiente
@@ -167,7 +167,7 @@ cadena = Mesero(Barista())
 cadena.manejar_pedido("agua")
 cadena.manejar_pedido("café")
 cadena.manejar_pedido("pastel")
-~~~
+\`\`\`
 
 ## 6. Strategy
 
@@ -175,7 +175,7 @@ cadena.manejar_pedido("pastel")
 
 **Código:**
 
-~~~python
+\`\`\`python
 class PagoEstrategia:
     def pagar(self, cantidad):
         pass
@@ -200,7 +200,7 @@ cliente1 = Cliente(PagoEfectivo())
 cliente2 = Cliente(PagoTarjeta())
 cliente1.realizar_pago(100)
 cliente2.realizar_pago(150)
-~~~
+\`\`\`
 
 ## ✅ Conclusión
 

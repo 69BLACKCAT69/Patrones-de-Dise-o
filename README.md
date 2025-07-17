@@ -1,12 +1,14 @@
-# Patrones-de-Diseño
+# Patrones de Diseño en una Cafetería Virtual
 
-☕ Escenario: Cafetería Virtual
+Este README.md describe la implementación de varios patrones de diseño creacionales, estructurales y de comportamiento utilizando el escenario de una cafetería virtual. Cada sección presenta un patrón con su respectiva explicación y código Python.
 
+## 1. Singleton
 
----
+**Descripción:** El patrón Singleton asegura que una clase tenga solo una instancia y proporciona un punto de acceso global a ella. En este ejemplo, la `CajaRegistradora` es un Singleton, garantizando que solo haya una caja registradora en la cafetería.
 
-1️⃣ Singleton — Solo puede existir una caja registradora
+**Código:**
 
+~~~python
 class CajaRegistradora:
     _instancia = None
 
@@ -23,12 +25,15 @@ class CajaRegistradora:
 caja1 = CajaRegistradora()
 caja2 = CajaRegistradora()
 print(caja1 is caja2)  # True
+~~~
 
+## 2. Adapter
 
----
+**Descripción:** El patrón Adapter permite que clases con interfaces incompatibles trabajen juntas. Actúa como un traductor entre dos interfaces. Aquí, el `AdaptadorTazaAmericana` adapta la interfaz de `TazaAmericana` a la interfaz esperada por la cafetería (`servir`).
 
-2️⃣ Adapter — Adaptar una taza americana a la taza que usamos
+**Código:**
 
+~~~python
 class TazaEuropea:
     def servir(self):
         print("☕ Sirviendo café en taza europea.")
@@ -49,12 +54,15 @@ taza1 = TazaEuropea()
 taza2 = AdaptadorTazaAmericana(TazaAmericana())
 taza1.servir()
 taza2.servir()
+~~~
 
+## 3. Bridge
 
----
+**Descripción:** El patrón Bridge desacopla una abstracción de su implementación, de manera que ambas puedan variar independientemente. En este caso, separa la forma de `PreparacionCafé` (abstracción) de la entidad que la utiliza para servir (`Barista` - implementación).
 
-3️⃣ Bridge — Separar la forma de preparar el café de cómo se sirve
+**Código:**
 
+~~~python
 class PreparacionCafé:
     def preparar(self):
         pass
@@ -79,12 +87,15 @@ barista1 = Barista(Expreso())
 barista2 = Barista(Capuchino())
 barista1.servir()
 barista2.servir()
+~~~
 
+## 4. Decorator
 
----
+**Descripción:** El patrón Decorator permite añadir funcionalidades a un objeto dinámicamente, envolviéndolo en un objeto decorador. Aquí, `ConLeche` y `ConCanela` son decoradores que añaden ingredientes y modifican la descripción y el costo de un objeto `CafeBase`.
 
-4️⃣ Decorator — Añadir ingredientes al café sin cambiar su clase
+**Código:**
 
+~~~python
 class CafeBase:
     def obtener_descripcion(self):
         return "Café"
@@ -118,12 +129,15 @@ cafe = ConLeche(cafe)
 cafe = ConCanela(cafe)
 print(cafe.obtener_descripcion())  # Café con leche con canela
 print(f"💵 Total: ${cafe.costo()} pesos")
+~~~
 
+## 5. Chain of Responsibility
 
----
+**Descripción:** El patrón Chain of Responsibility permite pasar una petición a través de una cadena de objetos hasta que uno de ellos la maneje. Cada objeto en la cadena decide si puede procesar la petición o si debe pasarla al siguiente. En este ejemplo, `Mesero` y `Barista` forman una cadena para manejar pedidos.
 
-5️⃣ Chain of Responsibility — Cada empleado decide si puede preparar un pedido
+**Código:**
 
+~~~python
 class Empleado:
     def __init__(self, siguiente=None):
         self.siguiente = siguiente
@@ -153,12 +167,15 @@ cadena = Mesero(Barista())
 cadena.manejar_pedido("agua")
 cadena.manejar_pedido("café")
 cadena.manejar_pedido("pastel")
+~~~
 
+## 6. Strategy
 
----
+**Descripción:** El patrón Strategy define una familia de algoritmos, encapsula cada uno y los hace intercambiables. Esto permite al algoritmo variar independientemente de los clientes que lo utilizan. Aquí, diferentes estrategias de pago (`PagoEfectivo`, `PagoTarjeta`) pueden ser utilizadas por el `Cliente`.
 
-6️⃣ Strategy — Seleccionar forma de pago (efectivo, tarjeta, QR)
+**Código:**
 
+~~~python
 class PagoEstrategia:
     def pagar(self, cantidad):
         pass
@@ -183,22 +200,8 @@ cliente1 = Cliente(PagoEfectivo())
 cliente2 = Cliente(PagoTarjeta())
 cliente1.realizar_pago(100)
 cliente2.realizar_pago(150)
+~~~
 
+## ✅ Conclusión
 
----
-
-✅ Conclusión
-
-Todos estos patrones están en el mismo mundo: una cafetería.
-
-Singleton: solo una caja
-
-Adapter: adaptar objetos diferentes
-
-Bridge: separar preparación de servicio
-
-Decorator: añadir ingredientes al vuelo
-
-Chain: empleados manejan lo que pueden
-
-Strategy: cambiar la forma de pagar
+Este ejemplo muestra cómo diferentes patrones de diseño pueden aplicarse en un contexto común como una cafetería virtual para resolver distintos problemas de diseño y mejorar la flexibilidad y mantenibilidad del código.
